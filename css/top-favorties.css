@@ -1,0 +1,87 @@
+body {
+    background-color: var(--light-color);
+    color: var(--dark-color);
+}
+
+#top-favorites-section {
+    padding: 60px 20px;
+    text-align: center;
+}
+
+#top-favorites-section h2 {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 40px;
+}
+
+#top-favorites-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.recipe-card {
+    background-color: white;
+    border: 2px solid var(--secondary-color);
+    border-radius: 8px;
+    box-shadow: var(--box-shadow);
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+.logo img {
+    height: 40px;
+    margin-right: 8px;
+}
+
+.recipe-card:hover {
+    transform: translateY(-5px);
+}
+
+.recipe-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.recipe-content {
+    padding: 20px;
+}
+
+.recipe-content h3 {
+    margin-bottom: 10px;
+    font-size: 1.3rem;
+    color: var(--dark-color);
+}
+
+.recipe-meta {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+.btn-small {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    font-weight: bold;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+/* 🎖️ Rank Badge */
+.rank-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: var(--secondary-color);
+    color: var(--dark-color);
+    font-weight: bold;
+    font-size: 1rem;
+    padding: 5px 10px;
+    border-radius: 20px;
+    box-shadow: var(--box-shadow);
+}

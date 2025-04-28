@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swedish Recipes - Home</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="images/dala-horse.webp" alt="Dala Horse">
+                    <h1>Swedish Recipes</h1>
+                </a>
+            </div>            
+            <nav>
+                <div class="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="category.html?category=breakfast">Breakfast</a></li>
+                    <li><a href="category.html?category=lunch">Lunch</a></li>
+                    <li><a href="category.html?category=dinner">Dinner</a></li>
+                    <li><a href="category.html?category=dessert">Desserts</a></li>
+                    <li class="user-menu">
+                        <a href="profile.php" id="user-dropdown-toggle">
+                            <img src="images/default-avatar.png" alt="User Avatar" id="user-avatar">
+                            <span id="user-name">User</span>
+                        </a>                                              
+                        <ul class="dropdown-menu">
+                            <li><a href="profile.php"><i class="fas fa-user-circle"></i> My Profile</a></li>
+                            <li><a href="favorites-page.php"><i class="fas fa-heart"></i> <span id="fav-count">My Favorites</span></a></li>
+                            <li><a href="#" id="logout-btn" class="logout-link"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>    
+
+    <section class="hero">
+        <div class="container">
+            <h2>Delicious Recipes For Every Occasion</h2>
+            <p>Discover easy-to-make recipes with adjustable serving sizes</p>
+            <div class="search-bar">
+            <input type="text" placeholder="Search recipes..." aria-label="Search recipes">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <section class="featured-recipes">
+        <div class="container">
+            <h2>Featured Recipes</h2>
+            <div class="recipe-grid">
+
+                <!-- Farmor's Mayo Chicken -->
+                <div class="recipe-card" data-category="dinner">
+                    <div class="recipe-image">
+                        <img src="images/recipes/chicken.jpg" alt="Parmesan Crusted Mayo Chicken Img">
+                    </div>
+                    <div class="recipe-content">
+                        <h3>Parmesan Crusted Mayo Chicken</h3>
+                        <p class="recipe-meta">
+                            <span><i class="far fa-clock"></i> 30 mins</span>
+                            <span><i class="fas fa-utensils"></i> 4 servings</span>
+                        </p>
+                        <p class="recipe-description">Juicy chicken breasts with a crispy parmesan crust, from Farmor's kitchen.</p>
+                        <a href="recipe.php?id=mayo-chicken" class="btn">View Recipe</a>
+                    </div>
+                </div>
+            
+                <!-- Swedish Pancakes -->
+                <div class="recipe-card" data-category="breakfast">
+                    <div class="recipe-image">
+                        <img src="images/recipes/pancakes.jpg" alt="Swedish Pancakes Img">
+                    </div>
+                    <div class="recipe-content">
+                        <h3>Swedish Pancakes</h3>
+                        <p class="recipe-meta">
+                            <span><i class="far fa-clock"></i> 20 mins</span>
+                            <span><i class="fas fa-utensils"></i> 4 servings</span>
+                        </p>
+                        <p class="recipe-description">Buttery, tender, thin Swedish pancakes with lacy edges.</p>
+                        <a href="recipe.php?id=swedish-pancakes" class="btn">View Recipe</a>
+                    </div>
+                </div>
+            
+                <!-- Traditional Cardamom Buns -->
+                <div class="recipe-card" data-category="dessert">
+                    <div class="recipe-image">
+                        <img src="images/recipes/cardamom-buns.jpg" alt="Cardamom Buns Img">
+                    </div>
+                    <div class="recipe-content">
+                        <h3>Traditional Swedish Cardamom Buns</h3>
+                        <p class="recipe-meta">
+                            <span><i class="far fa-clock"></i> 225 mins</span> <!-- 3hr 45min total -->
+                            <span><i class="fas fa-utensils"></i> 12 buns</span>
+                        </p>
+                        <p class="recipe-description">Soft and tender buns bursting with freshly ground cardamom flavor.</p>
+                        <a href="recipe.php?id=cardamom-buns" class="btn">View Recipe</a>
+                    </div>
+                </div>
+            
+            </div>            
+        </div>
+    </section>
+
+    <section class="categories">
+        <div class="container">
+            <h2>Browse By Category</h2>
+            <div class="category-grid">
+                <a href="#" class="category-item" data-category="breakfast">
+                    <i class="fas fa-coffee"></i>
+                    <h3>Breakfast</h3>
+                </a>
+                <a href="#" class="category-item" data-category="lunch">
+                    <i class="fas fa-hamburger"></i>
+                    <h3>Lunch</h3>
+                </a>
+                <a href="#" class="category-item" data-category="dinner">
+                    <i class="fas fa-utensils"></i>
+                    <h3>Dinner</h3>
+                </a>
+                <a href="#" class="category-item" data-category="dessert">
+                    <i class="fas fa-cookie"></i>
+                    <h3>Desserts</h3>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Swedish Recipes</h3>
+                    <p>Delicious recipes for every occasion.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Categories</h3>
+                    <ul>
+                        <li><a href="#" data-category="breakfast">Breakfast</a></li>
+                        <li><a href="#" data-category="lunch">Lunch</a></li>
+                        <li><a href="#" data-category="dinner">Dinner</a></li>
+                        <li><a href="#" data-category="dessert">Desserts</a></li>
+                        <li><a href="import.html">Import Recipe</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Connect With Us</h3>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                    <div class="language-selector">
+                        <select aria-label="Change language">
+                          <option value="en">English</option>
+                          <option value="sv">Svenska</option>
+                        </select>
+                      </div>                      
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Swedish Recipes. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const userNameSpan = document.getElementById('user-name');
+            const savedUserName = localStorage.getItem('userName');
+            if (savedUserName && userNameSpan) {
+                userNameSpan.textContent = savedUserName;
+            }
+
+            const menuToggle = document.querySelector('.menu-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+
+    if (menuToggle && navMenu) {
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        });
+    }
+        });
+        </script>        
+    <div id="toast" class="toast"></div>
+    <div id="tags-container" class="tags"></div>
+</body>
+</html>

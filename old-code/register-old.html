@@ -1,0 +1,143 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register - Swedish Recipes</title>
+    <link rel="stylesheet" href="css/auth.css">
+<link rel="stylesheet" href="css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.php">
+                    <img src="images/dala-horse.webp" alt="Dala Horse">
+                    <h1>Swedish Recipes</h1>
+                </a>
+            </div>            
+            <nav>
+                <div class="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.php">Home</a></li>
+                    <li><a href="category.html?category=breakfast">Breakfast</a></li>
+                    <li><a href="category.html?category=lunch">Lunch</a></li>
+                    <li><a href="category.html?category=dinner">Dinner</a></li>
+                    <li><a href="category.html?category=dessert">Desserts</a></li>
+                    <li class="user-menu">
+                        <a href="profile.php" id="user-dropdown-toggle">
+                            <img src="images/default-avatar.png" alt="User Avatar" id="user-avatar">
+                            <span id="user-name">User</span>
+                        </a>                                              
+                        <ul class="dropdown-menu">
+                            <li><a href="profile.php"><i class="fas fa-user-circle"></i> My Profile</a></li>
+                            <li><a href="favorites-page.php"><i class="fas fa-heart"></i> <span id="fav-count">My Favorites</span></a></li>
+                            <li><a href="#" id="logout-btn" class="logout-link"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>    
+<div class="auth-wrapper">
+    <div class="auth-container">
+    <h2>Register</h2>
+    <form id="register-form">
+        <label>Full Name</label>
+        <input type="text" name="name" required>
+
+        <label>Email</label>
+        <input type="email" name="email" required>
+
+        <label>Password</label>
+        <div class="password-wrapper">
+            <input type="password" name="password" id="register-password" required>
+            <span class="toggle-password" onclick="togglePassword('register-password', this)">👁️</span>
+        </div>
+        <small id="password-requirements">Password must be at least 12 characters, include 1 number, and 1 uppercase letter.</small>
+        <div id="password-strength"></div>
+
+        <button type="submit" class="btn">Register</button>
+        </form>
+
+        <p>Already have an account? <a href="login.html">Login</a></p>
+    </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script src="js/utils.js"></script>
+<script src="js/auth.js"></script>
+<script>
+   function togglePassword(id, elem) {
+        const input = document.getElementById(id);
+        if (input.type === "password") {
+            input.type = "text";
+            elem.classList.add('hide-password');
+            setTimeout(() => {
+                elem.textContent = "🙈";
+                elem.classList.remove('hide-password');
+            }, 150);
+        } else {
+            input.type = "password";
+            elem.classList.add('hide-password');
+            setTimeout(() => {
+                elem.textContent = "👁️";
+                elem.classList.remove('hide-password');
+            }, 150);
+        }
+    }
+    
+    const passwordInput = document.getElementById('register-password');
+    const passwordRequirements = document.getElementById('password-requirements');
+    const passwordStrength = document.getElementById('password-strength');
+    
+    if (passwordInput) {
+        passwordInput.addEventListener('input', () => {
+            const val = passwordInput.value;
+    
+            let requirementsMet = 0;
+            let totalRequirements = 3;
+    
+            // Check each condition
+            const lengthCheck = val.length >= 12;
+            const uppercaseCheck = /[A-Z]/.test(val);
+            const numberCheck = /\d/.test(val);
+            const menuToggle = document.querySelector('.menu-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+
+    if (menuToggle && navMenu) {
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        });
+    }
+    
+            if (lengthCheck) requirementsMet++;
+            if (uppercaseCheck) requirementsMet++;
+            if (numberCheck) requirementsMet++;
+    
+            // Update progress bar
+            passwordStrength.innerHTML = `
+                <div class="password-strength-bar">
+                    <div class="strength-segment ${requirementsMet >= 1 ? 'met' : ''}"></div>
+                    <div class="strength-segment ${requirementsMet >= 2 ? 'met' : ''}"></div>
+                    <div class="strength-segment ${requirementsMet >= 3 ? 'met' : ''}"></div>
+                </div>
+                <div class="strength-text">${requirementsMet === totalRequirements ? '✅ Strong Password' : '❗ Improve Your Password'}</div>
+            `;
+    
+            // Update the small text requirements dynamically
+            passwordRequirements.innerHTML = `
+                <ul style="text-align:left; font-size:0.85rem; margin-top:8px;">
+                    <li style="color:${lengthCheck ? 'green' : 'red'};">${lengthCheck ? '✅' : '❌'} At least 12 characters</li>
+                    <li style="color:${uppercaseCheck ? 'green' : 'red'};">${uppercaseCheck ? '✅' : '❌'} At least 1 uppercase letter</li>
+                    <li style="color:${numberCheck ? 'green' : 'red'};">${numberCheck ? '✅' : '❌'} At least 1 number</li>
+                </ul>
+            `;
+        });
+    }
+    </script>    
+</body>
+</html>

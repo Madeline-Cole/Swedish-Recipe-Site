@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Recipe Details - Swedish Recipes</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <div class="container">
+        <div class="logo">
+            <a href="index.php">
+                <img src="images/dala-horse.webp" alt="Dala Horse">
+                <h1>Swedish Recipes</h1>
+            </a>
+        </div>            
+        <nav>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.php">Home</a></li>
+                <li><a href="category.html?category=breakfast">Breakfast</a></li>
+                <li><a href="category.html?category=lunch">Lunch</a></li>
+                <li><a href="category.html?category=dinner">Dinner</a></li>
+                <li><a href="category.html?category=dessert">Desserts</a></li>
+                <li class="user-menu">
+                    <a href="profile.php" id="user-dropdown-toggle">
+                        <img src="images/default-avatar.png" alt="User Avatar" id="user-avatar">
+                        <span id="user-name">User</span>
+                    </a>                                              
+                    <ul class="dropdown-menu">
+                        <li><a href="profile.php"><i class="fas fa-user-circle"></i> My Profile</a></li>
+                        <li><a href="favorites-page.php"><i class="fas fa-heart"></i> <span id="fav-count">My Favorites</span></a></li>
+                        <li><a href="#" id="logout-btn" class="logout-link"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<section class="recipe-detail" data-dynamic="true">
+  <div class="container">
+    <div class="recipe-header">
+      <h1 id="recipe-title">Loading...</h1>
+    </div>
+
+    <div class="recipe-image-large">
+      <img id="recipe-image" src="images/placeholder-recipe.jpg" alt="Recipe Image">
+    </div>
+
+    <div class="recipe-actions">
+      <div class="serving-adjuster">
+        <strong>Servings:</strong>
+        <div class="serving-controls">
+          <button id="decrease-servings" class="btn-small">-</button>
+          <span id="servings">1</span>
+          <button id="increase-servings" class="btn-small">+</button>
+        </div>
+      </div>
+      <div class="recipe-buttons">
+        <button class="btn btn-small" onclick="window.print()">Print Recipe</button>
+        <button class="btn btn-small" id="favorite-btn" data-id=""><i class="far fa-heart"></i></button>
+      </div>
+    </div>
+
+    <div class="recipe-content-wrapper">
+      <div class="ingredients-section">
+        <h2>Ingredients</h2>
+        <ul id="recipe-ingredients">
+          <!-- Ingredients will load here -->
+        </ul>
+      </div>
+
+      <div class="instructions-section">
+        <h2>Instructions</h2>
+        <ol id="recipe-instructions">
+          <!-- Instructions will load here -->
+        </ol>
+      </div>
+    </div>
+
+    <div class="recipe-meta" id="recipe-meta">
+      <!-- Time, Calories, etc will go here -->
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Swedish Recipes</h3>
+        <p>Delicious recipes for every occasion.</p>
+      </div>
+      <div class="footer-section">
+        <h3>Categories</h3>
+        <ul>
+          <li><a href="category.html?category=breakfast">Breakfast</a></li>
+          <li><a href="category.html?category=lunch">Lunch</a></li>
+          <li><a href="category.html?category=dinner">Dinner</a></li>
+          <li><a href="category.html?category=dessert">Desserts</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Connect With Us</h3>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-pinterest"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Swedish Recipes. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<div id="toast" class="toast"></div>
+<div id="tags-container" class="tags"></div>
+
+<script src="js/utils.js"></script>
+<script src="js/script.js"></script>
+<script src="js/auth.js"></script>
+
+<script>
+// Load Recipe Details
+document.addEventListener('DOMContentLoaded', function() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const recipeId = urlParams.get('id');
+  const menuToggle = document.querySelector('.menu-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+
+    if (menuToggle && navMenu) {
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        });
+    }
+  
+  if (!recipeId) {
+    document.getElementById('recipe-title').textContent = 'Recipe Not Found';
+    return;
+  }
+
+  fetch(`php/recipes.php?action=get&id=${encodeURIComponent(recipeId)}`)
+    .then(res => res.json())
+    .then(recipe => {
+      if (!recipe || recipe.error) {
+        document.getElementById('recipe-title').textContent = 'Recipe Not Found';
+        return;
+      }
+
+      document.title = `${recipe.title} - Swedish Recipes`;
+      document.getElementById('recipe-title').textContent = recipe.title;
+      document.getElementById('recipe-image').src = recipe.image || 'images/placeholder-recipe.jpg';
+      document.getElementById('recipe-image').alt = recipe.title;
+
+      // Ingredients - simple
+      const ingredientsList = document.getElementById('recipe-ingredients');
+      ingredientsList.innerHTML = `<li>${recipe.description || "Ingredients coming soon."}</li>`;
+
+      // Instructions - placeholder (You could split by lines later if you save real steps)
+      const instructionsList = document.getElementById('recipe-instructions');
+      instructionsList.innerHTML = `<li>${recipe.description || "Instructions coming soon."}</li>`;
+
+      // Meta Info
+      const meta = document.getElementById('recipe-meta');
+      meta.innerHTML = `
+        <div><strong>Category:</strong> ${recipe.category}</div>
+        <div><strong>Time:</strong> ${recipe.time} mins</div>
+        <div><strong>Calories:</strong> ${recipe.calories} cal</div>
+        <div><strong>Servings:</strong> ${recipe.servings}</div>
+      `;
+
+      // Set Favorite Button ID
+      const favBtn = document.getElementById('favorite-btn');
+      favBtn.setAttribute('data-id', recipe.id);
+    })
+    .catch(error => {
+      console.error('Failed to load recipe:', error);
+      document.getElementById('recipe-title').textContent = 'Recipe Not Found';
+    });
+});
+</script>
+</body>
+</html>

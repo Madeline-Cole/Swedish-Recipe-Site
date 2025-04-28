@@ -1,0 +1,40 @@
+.import-recipe h2 {
+    text-align: center;
+    color: var(--dark-color);
+    margin-bottom: 30px;
+  }
+  
+  .import-options {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: var(--box-shadow);
+    max-width: 600px;
+    margin: 0 auto 40px;
+  }
+  
+  .import-options label {
+    display: block;
+    margin-top: 15px;
+    font-weight: 500;
+  }
+
+  .logo img {
+    height: 40px;
+    margin-right: 8px;
+}
+  
+  .import-options input[type="file"],
+  .import-options input[type="url"] {
+    width: 100%;
+    margin-top: 8px;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  #importPreview {
+    max-width: 800px;
+    margin: 40px auto;
+  }  

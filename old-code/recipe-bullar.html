@@ -1,0 +1,54 @@
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&display=swap" rel="stylesheet">
+<div class="container">
+    <div class="logo">
+        <h1>Swedish Recipes</h1>
+    </div>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.php">
+                    <img src="images/dala-horse.webp" alt="Dala Horse">
+                    <h1>Swedish Recipes</h1>
+                </a>
+            </div>            
+            <nav>
+                <div class="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.php">Home</a></li>
+                    <li><a href="category.html?category=breakfast">Breakfast</a></li>
+                    <li><a href="category.html?category=lunch">Lunch</a></li>
+                    <li><a href="category.html?category=dinner">Dinner</a></li>
+                    <li><a href="category.html?category=dessert">Desserts</a></li>
+                    <li class="user-menu">
+                        <a href="profile.php" id="user-dropdown-toggle">
+                            <img src="images/default-avatar.png" alt="User Avatar" id="user-avatar">
+                            <span id="user-name">User</span>
+                        </a>                                              
+                        <ul class="dropdown-menu">
+                            <li><a href="profile.php"><i class="fas fa-user-circle"></i> My Profile</a></li>
+                            <li><a href="favorites-page.php"><i class="fas fa-heart"></i> <span id="fav-count">My Favorites</span></a></li>
+                            <li><a href="#" id="logout-btn" class="logout-link"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>    
+    <script src="js/auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+        
+            if (menuToggle && navMenu) {
+                menuToggle.addEventListener('click', () => {
+                    navMenu.classList.toggle('active');
+                    menuToggle.classList.toggle('active');
+                });
+            }
+        });
+        </script>
+        
+    
